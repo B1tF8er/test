@@ -11,16 +11,20 @@ This is a sample project composed by
 
 # Objectives
 1. Add gitignore and gitattributtes files 
-2. Create a WPF and a WEB.API
-3. Add projects for unit testing to WPF and API projects
-4. Create SQL database with one table
- * Fields: Name (varchar), Avatar (varbinary), Email (varchar)
-5. WEB.API should use database first to connect to the database
+2. Create a WPF (Client) and a WEB.API (Api)
+3. Add projects for unit testing to WPF (Client.Tests) and API (Api.Tests) projects
+4. Create SQL script to create a database with one table and the following fields
+ * Fields
+    - Name (varchar)
+    - Avatar (varbinary)
+    - Email (varchar)
+5. WEB.API *must* use Entity Framework database first to connect to the database
 6. Establish communication from the WPF app with the WEB.API
 7. Add a controller to the WEB.API to get/post information from/to the database
 8. Create a view in the WPF project to manage that data (CRUD)
-9. Add a new field to the table and update the database context and show it in the CRUD
- * Field: Age (int)
+9. Craete a SQL script to add a new field to the table and update the database context and show it in the CRUD
+ * Field
+    - Age (int)
 
 ## Plus.
 1. IoC
