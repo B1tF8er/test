@@ -34,5 +34,5 @@ This is a sample project composed by
 # How to edit this project
 1. Create a github account if you don't have one already
 2. Fork this repository
-3. Create a feature branch
+3. Create a feature branch from the branch `test`
 4. Submit a Pull Request to this repository
