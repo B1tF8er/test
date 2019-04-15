@@ -13,6 +13,7 @@ namespace App.Wpf.Model
         private string _name;
         private byte[] _avatar;
         private string _email;
+        private int _age;
 
         public int Id
         {
@@ -20,7 +21,7 @@ namespace App.Wpf.Model
             set
             {
                 _id = value;
-                RaisePropertyChanged(nameof(Name));
+                RaisePropertyChanged(nameof(Id));
             }
         }
 
@@ -53,14 +54,14 @@ namespace App.Wpf.Model
             }
         }
 
-        /*
-        public User()
+        public int Age
         {
-            _id = 0;
-            _name = string.Empty;
-            _avatar = new byte[0];
-            _email = string.Empty;
+            get { return _age; }
+            set
+            {
+                _age = value;
+                RaisePropertyChanged(nameof(Age));
+            }
         }
-        */
     }
 }

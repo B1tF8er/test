@@ -34,11 +34,14 @@
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Image Grid.RowSpan="2" Height="60" Width="60" HorizontalAlignment="Left" Grid.Column="0"
+                        <Image Grid.RowSpan="3" Height="60" Width="60" HorizontalAlignment="Left" Grid.Column="0"
                                Source="{Binding Avatar, Converter={StaticResource byteToImageConverter}}" />
                         <Label Content="{Binding Name}" Grid.Column="1" Grid.Row="0"/>
                         <Label Content="{Binding Email}" Grid.Column="1" Grid.Row="1"/>
+                        <Label Content="Age:" Grid.Column="1" Grid.Row="2"/>
+                        <Label Content="{Binding Age}" Grid.Column="1" Grid.Row="2" Margin="25,0,0,0"/>
                     </Grid>
                 </StackPanel>
                 <Button Grid.Column="2" Content="&#xE70F;" 

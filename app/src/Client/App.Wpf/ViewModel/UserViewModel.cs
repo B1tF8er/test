@@ -236,7 +236,10 @@ namespace AppWpf.ViewModel
                 string.IsNullOrWhiteSpace(TempUser.Email) ||
                 !IsValidEmail(TempUser.Email) ||
                 TempUser.Avatar == null ||
-                TempUser.Avatar.Length == 0)
+                TempUser.Avatar.Length == 0 ||
+                TempUser.Age < 1 ||
+                TempUser.Age > 130
+                )
                 return false;
 
             return true;

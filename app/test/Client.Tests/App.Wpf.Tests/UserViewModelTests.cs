@@ -127,17 +127,61 @@ namespace App.Wpf.Tests
         }
 
         [Fact]
+        public void CanSaveUser_InvalidMinimumAge_ReturnsFalse()
+        {
+            UserViewModel userViewModel = new UserViewModel(_dataService);
+            var validName = "ValidName";
+            var validAvatar = new byte[1];
+            var validEmail = "ValidNameEmail@email.com";
+            var invalidMinimumAge = 0;
+
+
+            userViewModel.TempUser = new User();
+            userViewModel.TempUser.Name = validName;
+            userViewModel.TempUser.Avatar = validAvatar;
+            userViewModel.TempUser.Email = validEmail;
+            userViewModel.TempUser.Age = invalidMinimumAge;
+
+            var result = userViewModel.CanSaveUser();
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void CanSaveUser_InvalidMaximumAge_ReturnsFalse()
+        {
+            UserViewModel userViewModel = new UserViewModel(_dataService);
+            var validName = "ValidName";
+            var validAvatar = new byte[1];
+            var validEmail = "ValidNameEmail@email.com";
+            var invalidMaximumAge = 131;
+
+
+            userViewModel.TempUser = new User();
+            userViewModel.TempUser.Name = validName;
+            userViewModel.TempUser.Avatar = validAvatar;
+            userViewModel.TempUser.Email = validEmail;
+            userViewModel.TempUser.Age = invalidMaximumAge;
+
+            var result = userViewModel.CanSaveUser();
+
+            Assert.False(result);
+        }
+
+        [Fact]
         public void CanSaveUser_ValidUserPropierties_ReturnsTrue()
         {
             UserViewModel userViewModel = new UserViewModel(_dataService);
             var validName = "ValidName";
             var validAvatar = new byte[1];
             var validEmail = "ValidEmail@mail.com";
+            var validAge = 1;
 
             userViewModel.TempUser = new User();
             userViewModel.TempUser.Name = validName;
             userViewModel.TempUser.Avatar = validAvatar;
             userViewModel.TempUser.Email = validEmail;
+            userViewModel.TempUser.Age = validAge;
             var result = userViewModel.CanSaveUser();
 
             Assert.True(result);
