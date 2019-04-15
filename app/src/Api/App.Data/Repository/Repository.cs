@@ -27,33 +27,33 @@ namespace App.Data.Repository
 
         public TEntity Get(int id)
         {
-            return dataContext.Set<TEntity>().Find(id);
+            return DbContext.Set<TEntity>().Find(id);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return dataContext.Set<TEntity>().ToList();
+            return DbContext.Set<TEntity>().ToList();
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return dataContext.Set<TEntity>().Where(predicate);
+            return DbContext.Set<TEntity>().Where(predicate);
         }
 
         public void Add(TEntity entity)
         {
-            dataContext.Set<TEntity>().Add(entity);
+            DbContext.Set<TEntity>().Add(entity);
         }
 
         public void Update(TEntity entity)
         {
-            dataContext.Set<TEntity>().Attach(entity);
-            dataContext.Entry(entity).State = EntityState.Modified;
+            DbContext.Set<TEntity>().Attach(entity);
+            DbContext.Entry(entity).State = EntityState.Modified;
         }
 
         public void Remove(TEntity entity)
         {
-            dataContext.Set<TEntity>().Remove(entity);
+            DbContext.Set<TEntity>().Remove(entity);
         }
     }
 }

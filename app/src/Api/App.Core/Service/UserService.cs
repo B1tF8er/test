@@ -2,6 +2,7 @@
 using System.Linq;
 using App.Core.Repository;
 using App.Core.Domain;
+using System.Reflection;
 
 namespace App.Core.Service
 {
@@ -33,7 +34,17 @@ namespace App.Core.Service
 
         public void UpdateUser(User User)
         {
-            usersRepository.Update(User);
+            var targetUser = usersRepository.Get(User.Id);
+
+            foreach (PropertyInfo property in typeof(User).GetProperties())
+            {
+                if (property.CanWrite)
+                {
+                    property.SetValue(targetUser, property.GetValue(User, null), null);
+                }
+            }
+
+            usersRepository.Update(targetUser);
         }
 
         public void DeleteUser(User User)

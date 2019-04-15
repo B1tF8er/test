@@ -56,6 +56,15 @@ namespace App.WebApi.Controllers
 
             _userService.CreateUser(user);
 
+            try
+            {
+                _userService.SaveUser();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
             return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
@@ -111,6 +120,22 @@ namespace App.WebApi.Controllers
             }
 
             _userService.DeleteUser(user);
+
+            try
+            {
+                _userService.SaveUser();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(user);
         }
