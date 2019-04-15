@@ -1,0 +1,82 @@
+﻿<Window x:Class="AppWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        mc:Ignorable="d ignore"
+        Height="500"
+        Width="525"
+        Title="Users"
+        DataContext="{Binding UserViewModel, Source={StaticResource Locator}}">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Content="&#xE8FA;"
+                Command="{Binding CreateUserCommand}"
+                Style="{DynamicResource SegoeMDL2ButtonStyle}"
+                HorizontalAlignment="Right"
+                Grid.Column="1"></Button>
+        </Grid>
+        <ListView ItemsSource="{Binding Users}" 
+                  SelectedItem="{Binding SelectedUser}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
+                  ItemTemplate="{DynamicResource UserListViewItemTemplate}" 
+                  BorderBrush="{x:Null}"
+                  HorizontalContentAlignment="Stretch" 
+                  Background="{DynamicResource AppListBackgroundColor}"
+                  Grid.Row="1">
+        </ListView>
+
+        <Border Grid.RowSpan="2" Visibility="{Binding IsUserPopupOpen}" 
+                Style="{StaticResource UserPopupStyle}">
+            <StackPanel>
+                <Button Content="&#xE8BB;" HorizontalAlignment="Right"
+                        Style="{StaticResource SegoeMDL2ButtonStyle}" 
+                        Command="{Binding CloseUserPopupCommand}" />
+                <Label Content="Avatar" Width="35" HorizontalAlignment="Center" Padding="0,5"/>
+                <Image Height="80" Width="80" HorizontalAlignment="Center"
+                       Source="{Binding TempUser.Avatar, Converter={StaticResource byteToImageConverter}, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Content="&#xE7C5;" HorizontalAlignment="Center" Margin="0,12,0,0"
+                        Style="{StaticResource SegoeMDL2ButtonStyle}" 
+                        Command="{Binding LoadImageFileCommand}" />
+
+                <Label Content="Name:" Margin="12,12,12,0" Padding="0,5"/>
+                <TextBox Text="{Binding TempUser.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         Style="{StaticResource UserTextboxStyle}"/>
+
+                <Label Content="Email:" Margin="12,0,12,0" Padding="0,5"/>
+                <TextBox Text="{Binding TempUser.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         Style="{StaticResource UserTextboxStyle}"/>
+
+                <Label Content="Age:" Margin="12,0,12,0" Padding="0,5"/>
+                <DockPanel VerticalAlignment="Center" Margin="10">
+                    <TextBox Text="{Binding ElementName=ageSlider, Path=Value}" 
+                             DockPanel.Dock="Right" TextAlignment="Right" Width="40" Margin="0,0,3,0" IsEnabled="False" />
+                    <Slider Name="ageSlider" Value="{Binding TempUser.Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Minimum="1" Maximum="130" TickPlacement="BottomRight" TickFrequency="1" 
+                            IsSnapToTickEnabled="True" />
+                </DockPanel>
+
+                <Button Content="&#xE105;" HorizontalAlignment="Right" 
+                        Style="{StaticResource SegoeMDL2ButtonStyle}" 
+                        Command="{Binding SaveUserCommand}" Margin="0,20,12,0"/>
+            </StackPanel>
+        </Border>        
+    </Grid>
+</Window>
